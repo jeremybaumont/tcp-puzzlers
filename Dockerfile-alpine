@@ -1,0 +1,6 @@
+FROM alpine:3.12.1
+RUN apk add --no-cache strace
+RUN apk add --no-cache tcpdump
+RUN apk add --no-cache iproute2
+# CMD strace -r -i -e bind,listen,accept,poll,read,write nc -k -l -p 8080 -e echo "OK 200\r\n\r\n"
+ENTRYPOINT ["/bin/sh"]
