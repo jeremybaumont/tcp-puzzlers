@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  tcp-client:
+  kang:
     container_name: kang
     build:
       context: .
@@ -8,21 +8,21 @@ services:
     stdin_open: true # docker run -i
     tty: true
     networks:
-      - envoymesh
+      - tcp_puzzler
     depends_on:
-      - tcp-server
+      - kodos
 
-  tcp-server:
+  kodos:
     container_name: kodos
     build:
       context: .
       dockerfile: Dockerfile-alpine
     stdin_open: true # docker run -i
     tty: true
+    ports:
+      - "8080"
     networks:
-      envoymesh:
-        aliases:
-          - tcp-server
+      - tcp_puzzler
 
 networks:
-  envoymesh: {}
+  tcp_puzzler: {}
